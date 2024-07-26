@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
+import cors from "cors";
 
 import KostModel from "./models/KostModel.js";
 import Users from "./models/UserModel.js";
@@ -23,6 +24,7 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
