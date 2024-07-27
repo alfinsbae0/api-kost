@@ -21,10 +21,10 @@ npm start
 ```
 
 ## Use Production URL API
-This API has been on production mode with vercel app<br>
-Link : <br>
+This API has been on production mode with vercel<br>
+Base URL : <br>
 <a>https://api-kost-dd11002.vercel.app/</a><br>
-You can use this url for testing production API.
+Access this url for testing production API.
 
 ## Testing in Postman
 You can test this API Endpoint in postman. <br>
