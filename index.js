@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
-import cors from "cors";
 
 import KostModel from "./models/KostModel.js";
 import Users from "./models/UserModel.js";
@@ -17,14 +16,21 @@ const app = express();
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename);
 
-try {
-  db.authenticate().then(KostModel.sync(), Users.sync());
-  console.log("Database Connected...");
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
+async function connectToDatabase() {
+  try {
+    await db.authenticate();
+    console.log("Database Connected...");
+    await KostModel.sync();
+    console.log("KostModel synchronized");
+    await Users.sync();
+    console.log("Users model synchronized");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
 }
 
-app.use(cors());
+connectToDatabase();
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
